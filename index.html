@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paradis Ice Cream - Premium Ice Cream Shop in Los Angeles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --accent-color: #4a90d9;
+            --background-color: #f8f9fa;
+            --text-color: #333;
+            --light-text-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--background-color);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .py-4 { padding-top: 2rem; padding-bottom: 2rem; }
+        .py-6 { padding-top: 4rem; padding-bottom: 4rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn:hover {
+            background-color: #3a7ac2; /* slightly darker accent */
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-outline:hover {
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            transform: translateY(-2px);
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+        }
+        .navbar .logo {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--light-text-color);
+        }
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            margin-top: 0; /* Reset margin for mobile */
+        }
+        .navbar .nav-links li {
+            margin-left: 1.5rem;
+        }
+        .navbar .nav-links a {
+            color: var(--light-text-color);
+            font-weight: 600;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease, border-bottom 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .navbar .nav-links a:hover {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+        /* Mobile Navbar Toggle */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--light-text-color);
+        }
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                background-color: var(--primary-color);
+                margin-top: 1rem;
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links li {
+                margin: 0.5rem 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: url('https://source.unsplash.com/featured/1600x900/?Ice,cream,shop,professional') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-text-color);
+            text-align: center;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Overlay to make text readable */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 1.5rem;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--light-text-color);
+        }
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--light-text-color);
+            font-weight: 400;
+        }
+        .hero .btn {
+            font-size: 1.2rem;
+            padding: 1rem 2.5rem;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .hero .btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+            background-color: var(--background-color);
+        }
+        section:nth-of-type(even) {
+            background-color: #e0e0e0; /* Slightly different background for visual separation */
+        }
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+            section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            section {
+                padding: 3rem 0;
+            }
+            section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .service-card {
+            background-color: var(--light-text-color);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        .service-card i {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .service-card p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        .service-card .learn-more {
+            color: var(--accent-color);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            display: inline-block;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 0.2rem;
+        }
+        .service-card .learn-more:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .about-text {
+            max-width: 700px;
+            text-align: center;
+        }
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .about-image {
+            max-width: 900px;
+            width: 100%;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        @media (min-width: 992px) {
+            .about-content {
+                flex-direction: row;
+                text-align: left;
+                justify-content: space-between;
+            }
+            .about-text {
+                flex: 1;
+                text-align: left;
+                padding-right: 3rem;
+            }
+            .about-image {
+                flex: 1;
+                max-width: 50%;
+            }
+        }
+        @media (max-width: 991px) {
+            .about-text h3 {
+                font-size: 1.8rem;
+            }
+            .about-text p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .review-card {
+            background-color: var(--light-text-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .review-card .stars {
+            color: #ffc107; /* Gold color for stars */
+            margin-bottom: 1rem;
+        }
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #444;
+            flex-grow: 1;
+        }
+        .review-card .reviewer {
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: right;
+        }
+
+        /* New Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .feature-item {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .feature-item::before {
+            content: 'NOW AVAILABLE';
+            position: absolute;
+            top: 15px;
+            right: -40px;
+            background-color: var(--accent-color);
+            color: var(--light-text-color);
+            padding: 5px 40px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transform: rotate(45deg);
+            z-index: 10;
+            letter-spacing: 0.5px;
+        }
+        .feature-item h3 {
+            font-size: 1.6rem;
+            margin-bottom: 0.8rem;
+            color: var(--light-text-color);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .feature-item p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        .feature-item:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        .feature-item:hover::before {
+            background-color: var(--primary-color);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        .contact-info, .contact-form, .contact-map {
+            flex: 1;
+            min-width: 300px;
+        }
+        .contact-info h3, .contact-form h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        .contact-info p i {
+            color: var(--accent-color);
+            margin-right: 0.8rem;
+            font-size: 1.3rem;
+        }
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-form input:focus,
+        .contact-form select:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.2);
+        }
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .contact-map {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .contact-map iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            display: block; /* Remove extra space below iframe */
+        }
+        @media (max-width: 768px) {
+            .contact-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+            .contact-map iframe {
+                height: 300px;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 4rem 0 2rem 0;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-align: left;
+        }
+        .footer .footer-col {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        .footer .footer-col h4 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .footer .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--light-text-color);
+            border-radius: 1.5px;
+        }
+        .footer .footer-col ul {
+            list-style: none;
+        }
+        .footer .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+        .footer .footer-col ul li a {
+            color: var(--light-text-color);
+            transition: color 0.3s ease;
+        }
+        .footer .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+        .footer .footer-col p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+        .footer .footer-col p i {
+            margin-right: 0.8rem;
+            color: var(--accent-color);
+        }
+        .footer .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+        @media (max-width: 768px) {
+            .footer .container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer .footer-col {
+                min-width: unset;
+                width: 100%;
+                padding: 0;
+            }
+            .footer .footer-col h4::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .footer .footer-col p {
+                justify-content: center;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 60px;
+            height: 60px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #1da851;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation Bar -->
+    <nav class="navbar" id="home">
+        <div class="container">
+            <a href="#home" class="logo">Paradis Ice Cream</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#contact" class="btn btn-outline">Book Now</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Experience the Sweetest Moments at Paradis Ice Cream</h1>
+            <p>Premium handcrafted ice cream, exceptional service, and delightful flavors awaiting you in Downtown LA.</p>
+            <a href="#contact" class="btn">Book Now for Your Event!</a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-6">
+        <div class="container">
+            <h2>Our Sweet Offerings</h2>
+            <div class="services-grid">
+                <!-- Ice cream shop -->
+                <div class="service-card">
+                    <i class="fas fa-ice-cream"></i>
+                    <h3>Ice cream shop</h3>
+                    <p>Indulge in our exquisite range of handcrafted ice creams, made with the finest ingredients.</p>
+                    <a href="#contact" class="learn-more">Explore Flavors</a>
+                </div>
+                <!-- Free Consultation -->
+                <div class="service-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Free Consultation</h3>
+                    <p>Discuss your special event or custom order needs with our experts at no cost, no obligation.</p>
+                    <a href="#contact" class="learn-more">Schedule Now</a>
+                </div>
+                <!-- Online Appointments -->
+                <div class="service-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Online Appointments</h3>
+                    <p>Easily book a time to discuss catering or a special pick-up directly from our website.</p>
+                    <a href="#contact" class="learn-more">Book Online</a>
+                </div>
+                <!-- Expert Team -->
+                <div class="service-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Expert Team</h3>
+                    <p>Our passionate team is dedicated to crafting delightful flavors and providing memorable service.</p>
+                    <a href="#about" class="learn-more">Meet Our Team</a>
+                </div>
+                <!-- Quality Guaranteed -->
+                <div class="service-card">
+                    <i class="fas fa-award"></i>
+                    <h3>Quality Guaranteed</h3>
+                    <p>We commit to using only premium ingredients, ensuring every scoop meets our high standards.</p>
+                    <a href="#about" class="learn-more">Our Commitment</a>
+                </div>
+                <!-- Customer Support -->
+                <div class="service-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>Customer Support</h3>
+                    <p>Our friendly support team is ready to assist you with any questions or special requests.</p>
+                    <a href="#contact" class="learn-more">Get Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-6">
+        <div class="container">
+            <h2>About Paradis Ice Cream</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Crafting Joy, One Scoop at a Time</h3>
+                    <p>At Paradis Ice Cream, located in the heart of Los Angeles at 700 S Spring St, we believe that ice cream is more than just a dessert—it's an experience. Since our inception, we've been dedicated to creating unique, premium flavors that bring smiles to faces.</p>
+                    <p>Our commitment to 'Quality Guaranteed' means we meticulously select the finest, freshest ingredients. Behind every delicious creation is our 'Expert Team', a group of passionate individuals who not only master the art of ice cream making but also excel in 'Customer Support', ensuring your experience with us is always delightful.</p>
+                    <p>Whether you're visiting our 'Ice cream shop' for a quick treat or utilizing our 'Online Appointments' for a special event, we're here to serve you with excellence and a touch of paradise.</p>
+                    <a href="#contact" class="btn mt-4">Get a Free Consultation</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://source.unsplash.com/featured/900x600/?Ice,cream,shop,team" alt="Paradis Ice Cream Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-6">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>Paradis Ice Cream is my go-to spot in DTLA! Their 'Ice cream shop' experience is top-notch, and I truly appreciate the 'Quality Guaranteed' in every flavor. I even used their 'Online Appointments' to arrange a larger order for a party, and it was seamless. Highly recommend!</p>
+                    <div class="reviewer">- Maria P., Los Angeles, CA</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>What a gem! The 'Expert Team' at Paradis Ice Cream helped me choose the perfect combination of flavors for my event. I had a 'Free Consultation' beforehand which was incredibly helpful. Their dedication to 'Customer Support' is evident, making every visit a pleasure.</p>
+                    <div class="reviewer">- David L., Los Angeles, CA</div>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>Simply the best ice cream in the city! The ambiance is great, and knowing they offer 'Quality Guaranteed' products makes a huge difference. I love how easy it is to communicate with them; their 'Customer Support' is fantastic. A must-visit at 700 S Spring St!</p>
+                    <div class="reviewer">- Sarah K., Los Angeles, CA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Features Section -->
+    <section class="py-6">
+        <div class="container">
+            <h2>Experience Our Innovative Features</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h3>Live Chat</h3>
+                    <p>Instant visitor support, 24/7, for quick answers to all your ice cream cravings.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Online Booking</h3>
+                    <p>Easily book your next catering consultation or event pick-up directly without calling.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>AI Assistant</h3>
+                    <p>Get immediate answers to common questions about our flavors, ingredients, and services automatically.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>AI Voice Agent</h3>
+                    <p>Every call answered promptly, ensuring you never miss an opportunity to connect with us.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>WhatsApp Integration</h3>
+                    <p>Instant replies and convenient communication for all your inquiries directly on WhatsApp.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Live Google Reviews</h3>
+                    <p>See what our delighted customers are saying, updated automatically on the site in real-time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-6">
+        <div class="container">
+            <h2>Connect With Paradis Ice Cream</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Our Contact Details</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 700 S Spring St, Los Angeles, CA 90014, United States</p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+12138661468">+1 213-866-1468</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:info@paradisicecream.com">info@paradisicecream.com</a></p>
+                    <p class="mt-8">We are passionate about serving the freshest, most delightful ice cream in Los Angeles. Reach out to us for any inquiries, custom orders, or just to say hello!</p>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us an Enquiry</h3>
+                    <form action="#" method="POST"> <!-- In a real scenario, this would post to a backend -->
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                        <input type="tel" name="phone" placeholder="Your Phone Number">
+                        <select name="service" required>
+                            <option value="">Select a Service of Interest</option>
+                            <option value="Ice cream shop visit">Ice cream shop (General Inquiry)</option>
+                            <option value="Free Consultation">Free Consultation</option>
+                            <option value="Online Appointments">Online Appointments</option>
+                            <option value="Expert Team">Expert Team (Inquiry)</option>
+                            <option value="Quality Guaranteed">Quality Guaranteed (Feedback)</option>
+                            <option value="Customer Support">Customer Support</option>
+                        </select>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.803099035272!2d-118.25418132338692!3d34.05067647316719!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c62c2f782c5b%3A0xe54d68e5d0a62d41!2s700%20S%20Spring%20St%2C%20Los%20Angeles%2C%20CA%2090014%2C%20USA!5e0!3m2!1sen!2sde!4v1701712345678!5m2!1sen!2sde" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-col">
+                <h4>Paradis Ice Cream</h4>
+                <p>A premium Ice cream shop serving 700 S Spring St, Los Angeles, CA 90014, United States.</p>
+                <p>Dedicated to crafting joy, one scoop at a time, with 'Quality Guaranteed' in every delightful flavor.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#reviews">Testimonials</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Our Services</h4>
+                <ul>
+                    <li><a href="#services">Ice cream shop</a></li>
+                    <li><a href="#services">Free Consultation</a></li>
+                    <li><a href="#services">Online Appointments</a></li>
+                    <li><a href="#services">Expert Team</a></li>
+                    <li><a href="#services">Quality Guaranteed</a></li>
+                    <li><a href="#services">Customer Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> 700 S Spring St, Los Angeles, CA 90014, USA</p>
+                <p><i class="fas fa-phone-alt"></i> +1 213-866-1468</p>
+                <p><i class="fas fa-envelope"></i> info@paradisicecream.com</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Paradis Ice Cream. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/+12138661468" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('.nav-links a, .hero .btn, .footer a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - (targetId === 'home' ? 0 : document.querySelector('.navbar').offsetHeight), // Adjust for sticky header
+                        behavior: 'smooth'
+                    });
+                }
+
+                // Close mobile menu if open
+                if (document.getElementById('nav-list').classList.contains('active')) {
+                    document.getElementById('nav-list').classList.remove('active');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            document.getElementById('nav-list').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside (optional, but good UX)
+        document.addEventListener('click', function(event) {
+            const navList = document.getElementById('nav-list');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (!navList.contains(event.target) && !mobileMenu.contains(event.target) && navList.classList.contains('active')) {
+                navList.classList.remove('active');
+            }
+        });
+
+        // Sticky header logic (add class on scroll)
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) { // Adjust scroll threshold as needed
+                navbar.style.backgroundColor = 'var(--primary-color)'; // Ensure color is consistent if it changes initially
+                navbar.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+            } else {
+                navbar.style.backgroundColor = 'var(--primary-color)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
